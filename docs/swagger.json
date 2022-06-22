@@ -1,0 +1,113 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Calculate your data and get history with it",
+        "title": "Calculator API",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {},
+        "version": "1.0"
+    },
+    "paths": {
+        "/calculate": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Calculate"
+                ],
+                "summary": "Calculate between 2 integer",
+                "operationId": "get-calculate",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "string",
+                        "name": "first",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "string",
+                        "name": "second",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/domain.CalculateResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/calculate/history": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Calculate"
+                ],
+                "summary": "Get Calculate history",
+                "operationId": "get-calculate-history",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/domain.CalculationHistoryResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "domain.CalculateResponse": {
+            "type": "object",
+            "properties": {
+                "divide": {
+                    "type": "number"
+                },
+                "sub": {
+                    "type": "integer"
+                },
+                "sum": {
+                    "type": "integer"
+                },
+                "times": {
+                    "type": "integer"
+                }
+            }
+        },
+        "domain.CalculationHistoryResponse": {
+            "type": "object",
+            "properties": {
+                "ID": {
+                    "type": "integer"
+                },
+                "divide": {
+                    "type": "number"
+                },
+                "firstInteger": {
+                    "type": "integer"
+                },
+                "secondInteger": {
+                    "type": "integer"
+                },
+                "subtract": {
+                    "type": "integer"
+                },
+                "sum": {
+                    "type": "integer"
+                },
+                "times": {
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,74 @@
+definitions:
+  domain.CalculateResponse:
+    properties:
+      divide:
+        type: number
+      sub:
+        type: integer
+      sum:
+        type: integer
+      times:
+        type: integer
+    type: object
+  domain.CalculationHistoryResponse:
+    properties:
+      ID:
+        type: integer
+      divide:
+        type: number
+      firstInteger:
+        type: integer
+      secondInteger:
+        type: integer
+      subtract:
+        type: integer
+      sum:
+        type: integer
+      times:
+        type: integer
+    type: object
+info:
+  contact: {}
+  description: Calculate your data and get history with it
+  termsOfService: http://swagger.io/terms/
+  title: Calculator API
+  version: "1.0"
+paths:
+  /calculate:
+    get:
+      operationId: get-calculate
+      parameters:
+      - description: string
+        in: query
+        name: first
+        required: true
+        type: string
+      - description: string
+        in: query
+        name: second
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.CalculateResponse'
+      summary: Calculate between 2 integer
+      tags:
+      - Calculate
+  /calculate/history:
+    get:
+      operationId: get-calculate-history
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.CalculationHistoryResponse'
+      summary: Get Calculate history
+      tags:
+      - Calculate
+swagger: "2.0"
