@@ -1,7 +1,7 @@
 package delivery
 
 import (
-	"dumpro/domain"
+	"dumpro/calculate/domain"
 )
 
 func MapCalculateResponse(sum int, sub int, times int, div float64) domain.CalculateResponse {

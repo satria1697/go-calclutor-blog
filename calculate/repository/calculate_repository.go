@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"dumpro/domain"
+	"dumpro/calculate/domain"
 	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"

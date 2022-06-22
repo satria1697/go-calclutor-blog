@@ -2,7 +2,7 @@ package http
 
 import (
 	"dumpro/calculate/delivery"
-	"dumpro/domain"
+	"dumpro/calculate/domain"
 	"dumpro/utils"
 	"github.com/gin-gonic/gin"
 	"net/http"

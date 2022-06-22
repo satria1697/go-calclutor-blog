@@ -1,7 +1,7 @@
-package postgresql
+package database
 
 import (
-	"dumpro/domain"
+	"dumpro/calculate/domain"
 	"dumpro/utils"
 	"fmt"
 	"gorm.io/driver/postgres"

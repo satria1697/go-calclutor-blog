@@ -1,7 +1,7 @@
 package usecase
 
 import (
-	"dumpro/domain"
+	"dumpro/calculate/domain"
 	"github.com/gin-gonic/gin"
 	"strconv"
 )
@@ -17,8 +17,7 @@ func NewCalculateUseCase(repo domain.CalculateRepository) domain.CalculateUseCas
 }
 
 func (c calculateUseCase) GetCalculationHistoryUc(ctx *gin.Context) ([]domain.CalculationHistory, error) {
-	res, err := c.calculateRepo.GetCalculationHistoryRepository(ctx)
-	return res, err
+	return c.calculateRepo.GetCalculationHistoryRepository(ctx)
 }
 
 func (c calculateUseCase) GetCalculationUc(ctx *gin.Context, a string, b string) (int, int, int, float64, error) {
