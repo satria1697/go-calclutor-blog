@@ -3,8 +3,11 @@ module dumpro
 go 1.18
 
 require (
+	github.com/DATA-DOG/go-sqlmock v1.5.0
 	github.com/gin-gonic/gin v1.8.1
 	github.com/go-redis/redis/v8 v8.11.5
+	github.com/go-redis/redismock/v8 v8.0.6
+	github.com/gofrs/uuid v4.0.0+incompatible
 	github.com/joho/godotenv v1.4.0
 	github.com/sirupsen/logrus v1.4.2
 	github.com/stretchr/testify v1.7.2

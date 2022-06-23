@@ -32,6 +32,9 @@ func MapCalculateResponse(sum int, sub int, times int, div float64) CalculateRes
 
 func MapCalculateHistoryResponse(res []domain.CalculationHistory) []CalculationHistoryResponse {
 	var ponse []CalculationHistoryResponse
+	if res == nil {
+		return []CalculationHistoryResponse{}
+	}
 	for _, re := range res {
 		var pon CalculationHistoryResponse
 		pon.ID = re.ID
@@ -42,9 +45,6 @@ func MapCalculateHistoryResponse(res []domain.CalculationHistory) []CalculationH
 		pon.Times = re.Times
 		pon.Divide = re.Divide
 		ponse = append(ponse, pon)
-	}
-	if len(res) == 0 {
-		return []CalculationHistoryResponse{}
 	}
 	return ponse
 }
