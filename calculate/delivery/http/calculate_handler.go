@@ -27,7 +27,7 @@ func NewCalculateHandler(r *gin.Engine, calculateUc domain.CalculateUseCase) {
 // @Produce      json
 // @Param        first   query      string  true "string"
 // @Param        second   query      string  true "string"
-// @Success      200  {object}  domain.CalculateResponse
+// @Success      200  {object}  delivery.CalculateResponse
 // @Router       /calculate [get]
 func (h CalculateHandler) GetCalculation(c *gin.Context) {
 	var request domain.CalculateGetRequest
@@ -52,7 +52,7 @@ func (h CalculateHandler) GetCalculation(c *gin.Context) {
 // @ID           get-calculate-history
 // @Tags         Calculate
 // @Produce      json
-// @Success      200  {object}  domain.CalculationHistoryResponse
+// @Success      200  {object}  delivery.CalculationHistoryResponse
 // @Router       /calculate/history [get]
 func (h CalculateHandler) GetCalculationHistory(c *gin.Context) {
 	res, err := h.calculateUseCase.GetCalculationHistoryUc(c)

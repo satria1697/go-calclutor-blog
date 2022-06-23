@@ -20,23 +20,6 @@ type CalculationHistory struct {
 	Divide        float64
 }
 
-type CalculationHistoryResponse struct {
-	ID            uint    `json:"ID"`
-	FirstInteger  int     `json:"firstInteger"`
-	SecondInteger int     `json:"secondInteger"`
-	Sum           int     `json:"sum"`
-	Subtract      int     `json:"subtract"`
-	Times         int     `json:"times"`
-	Divide        float64 `json:"divide"`
-}
-
-type CalculateResponse struct {
-	Sum    int     `json:"sum"`
-	Sub    int     `json:"sub"`
-	Times  int     `json:"times"`
-	Divide float64 `json:"divide"`
-}
-
 type CalculateUseCase interface {
 	GetCalculationUc(ctx *gin.Context, a string, b string) (int, int, int, float64, error)
 	GetCalculationHistoryUc(ctx *gin.Context) ([]CalculationHistory, error)

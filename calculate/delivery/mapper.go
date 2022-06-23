@@ -4,8 +4,25 @@ import (
 	"dumpro/calculate/domain"
 )
 
-func MapCalculateResponse(sum int, sub int, times int, div float64) domain.CalculateResponse {
-	return domain.CalculateResponse{
+type CalculationHistoryResponse struct {
+	ID            uint    `json:"ID"`
+	FirstInteger  int     `json:"firstInteger"`
+	SecondInteger int     `json:"secondInteger"`
+	Sum           int     `json:"sum"`
+	Subtract      int     `json:"subtract"`
+	Times         int     `json:"times"`
+	Divide        float64 `json:"divide"`
+}
+
+type CalculateResponse struct {
+	Sum    int     `json:"sum"`
+	Sub    int     `json:"sub"`
+	Times  int     `json:"times"`
+	Divide float64 `json:"divide"`
+}
+
+func MapCalculateResponse(sum int, sub int, times int, div float64) CalculateResponse {
+	return CalculateResponse{
 		Sum:    sum,
 		Sub:    sub,
 		Times:  times,
@@ -13,10 +30,10 @@ func MapCalculateResponse(sum int, sub int, times int, div float64) domain.Calcu
 	}
 }
 
-func MapCalculateHistoryResponse(res []domain.CalculationHistory) []domain.CalculationHistoryResponse {
-	var ponse []domain.CalculationHistoryResponse
+func MapCalculateHistoryResponse(res []domain.CalculationHistory) []CalculationHistoryResponse {
+	var ponse []CalculationHistoryResponse
 	for _, re := range res {
-		var pon domain.CalculationHistoryResponse
+		var pon CalculationHistoryResponse
 		pon.ID = re.ID
 		pon.FirstInteger = re.FirstInteger
 		pon.SecondInteger = re.SecondInteger
@@ -27,7 +44,7 @@ func MapCalculateHistoryResponse(res []domain.CalculationHistory) []domain.Calcu
 		ponse = append(ponse, pon)
 	}
 	if len(res) == 0 {
-		return []domain.CalculationHistoryResponse{}
+		return []CalculationHistoryResponse{}
 	}
 	return ponse
 }
