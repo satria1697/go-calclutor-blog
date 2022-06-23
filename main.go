@@ -1,12 +1,17 @@
 package main
 
 import (
+	calculatehandler "dumpro/calculate/delivery/http"
+	calculaterepository "dumpro/calculate/repository"
+	calculateusecase "dumpro/calculate/usecase"
 	"dumpro/database"
 	redisClient "dumpro/database/redis"
 	_ "dumpro/docs"
-	"dumpro/router"
 	"dumpro/utils"
+	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 // @title           Calculator API
@@ -23,7 +28,12 @@ func main() {
 	}
 	redisDb := redisClient.InitRedis(config.RedisConfig)
 
-	r := router.SetupRouter(postgrestDb, redisDb)
+	r := gin.Default()
+	calculateRepo := calculaterepository.NewCalculateRepository(postgrestDb, redisDb)
+	calculateUseCase := calculateusecase.NewCalculateUseCase(calculateRepo)
+	calculatehandler.NewCalculateHandler(r, calculateUseCase)
+
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	err = r.Run(config.Port)
 	if err != nil {
 		logrus.Fatalf("Error Gin %v", err)
