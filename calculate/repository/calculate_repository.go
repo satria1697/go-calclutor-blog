@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"dumpro/domain"
+	"dumpro/calculate/domain"
 	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-var CalculateHistoryKey = "C-History"
+const CalculateHistoryKey = "C-History"
 
 type calculateRepository struct {
 	postgresDb *gorm.DB
@@ -31,7 +31,7 @@ func (r calculateRepository) GetCalculationHistoryRepository(ctx *gin.Context) (
 	if err == redis.Nil {
 		fmt.Printf("%v\n", result)
 
-		dbRes := r.postgresDb.Find(&res)
+		dbRes := r.postgresDb.Unscoped().Find(&res)
 		if dbRes.Error != nil {
 			return nil, dbRes.Error
 		}
@@ -39,7 +39,10 @@ func (r calculateRepository) GetCalculationHistoryRepository(ctx *gin.Context) (
 		if err != nil {
 			return nil, err
 		}
-		err = r.redisDb.Set(ctx, CalculateHistoryKey, marshal, 1000*time.Second).Err()
+		err = r.redisDb.Set(ctx, CalculateHistoryKey, marshal, 100*time.Second).Err()
+		if err != nil {
+			return nil, err
+		}
 		return res, nil
 	} else if err != nil {
 		return nil, err

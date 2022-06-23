@@ -4,8 +4,8 @@ import (
 	calculatehandler "dumpro/calculate/delivery/http"
 	calculaterepository "dumpro/calculate/repository"
 	calculateusecase "dumpro/calculate/usecase"
-	"dumpro/database/postgresql"
-	"dumpro/database/redis"
+	"dumpro/database"
+	redisClient "dumpro/database/redis"
 	_ "dumpro/docs"
 	"dumpro/utils"
 	"github.com/gin-gonic/gin"
@@ -22,11 +22,11 @@ import (
 func main() {
 	config := utils.GetConfigs()
 
-	postgrestDb, err := postgresql.InitDatabase(config.PostgresConfig)
+	postgrestDb, err := database.InitDatabase(config.PostgresConfig)
 	if err != nil {
 		logrus.Fatalf("Error Database %v", err)
 	}
-	redisDb := redis.InitRedis(config.RedisConfig)
+	redisDb := redisClient.InitRedis(config.RedisConfig)
 
 	r := gin.Default()
 	calculateRepo := calculaterepository.NewCalculateRepository(postgrestDb, redisDb)
@@ -34,7 +34,6 @@ func main() {
 	calculatehandler.NewCalculateHandler(r, calculateUseCase)
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-
 	err = r.Run(config.Port)
 	if err != nil {
 		logrus.Fatalf("Error Gin %v", err)
